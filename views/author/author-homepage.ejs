@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Author Homepage</title>
+        <!-- Include CSS -->
+        <link rel="stylesheet" type="text/css" href="/css/bootstrap.min.css" />
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+        <link rel="stylesheet" type="text/css" href="/main.css">
+    </head>
+    <body>
+        <div class="main-wrapper d-flex flex-nowrap">
+            <div class="flex flex-column flex-shrink-0 sidebar pt-5">
+                <div class="nav-title"><i class="fa fa-smile-o fa-lg me-2"></i>Welcome Back !</div>
+                <ul class="list-unstyled pt-4">
+                    <li><a href="/"><p class="pt-0">Back To Main Page<i class="fa fa-chevron-right"></i></p></a></li>
+                    <li><a href="/author/setting/"><p>Settings<i class="fa fa-chevron-right"></i></p></a></li>
+                    <li><a href="/author/logout/"><p>Logout<i class="fa fa-chevron-right"></i></p></a></li>
+                </ul>
+            </div>
+            <div class="content pt-5 w-100">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-12">
+                            <div class="page-top d-flex align-items-end justify-content-between pb-4">
+                                <div>
+                                    <h6>Author - Homepage</h6>
+                                    <h1><%= output.blog.blog_title %></h1>
+                                </div>
+                                <div>
+                                    <h6><%= output.blog.author_name %></h6>
+                                </div>
+                            </div>
+
+                            <div class="article-list pt-5 pe-5">
+                                <h5 class="mb-4"><b>Manage Your Article</b></h5>
+                                <ul class="nav nav-pills mb-3 d-flex justify-content-between " id="pills-tab" role="tablist">
+                                    <div class="d-flex flex-row gap-3">
+                                        <li class="nav-item" role="presentation">
+                                            <button class="nav-link active" id="pills-draft-tab" data-bs-toggle="pill" data-bs-target="#pills-draft" type="button" role="tab" aria-controls="pills-draft" aria-selected="true">Draft Article</button>
+                                          </li>
+                                          <li class="nav-item" role="presentation">
+                                            <button class="nav-link" id="pills-published-tab" data-bs-toggle="pill" data-bs-target="#pills-published" type="button" role="tab" aria-controls="pills-published" aria-selected="false">Published Article</button>
+                                          </li>
+                                    </div>
+                                    <div>
+                                        <a href="/author/new-article?mode=new"><button class="createbtn">Create New Draft</button></a>
+                                    </div>
+   
+                                  </ul>
+                                  <div class="tab-content mt-4" id="pills-tabContent">
+                                    <div class="tab-pane fade show active" id="pills-draft" role="tabpanel" aria-labelledby="pills-draft-tab" tabindex="0">
+                                        <table class="table custom-table table-hover">
+                                            <thead class="table-dark">
+                                              <tr>
+                                                <th scope="col">#</th>
+                                                <th scope="col">Article Title</th>
+                                                <th scope="col">Created Time</th>
+                                                <th scope="col">Last Modified</th>
+                                                <th scope="col">Action</th>
+                                              </tr>
+                                            </thead>
+                                            <tbody>
+                                            <% output.draft.forEach(function(output){ %>
+                                              <tr>
+                                                <td><%= output.ArticleID %></td>
+                                                <td><%= output.title %></td>
+                                                <td><%= output.created_time %></td>
+                                                <td><%= output.last_modified %></td>
+                                                <td class="d-flex gap-1 flex-wrap">
+                                                    <a href="/author/edit-article?id=<%= output.ArticleID %>&mode=edit"><button class="btn btn-outline-primary">Edit</button></a>
+                                                    <form action="/author/publish-draft?id=<%= output.ArticleID %>" method="POST"><button type="submit" onclick="return confirm('Confirm to publish?')" class="btn btn-outline-success">Publish</button></form>
+                                                    <form action="/author/delete-article?id=<%= output.ArticleID %>" method="POST"><button type="submit" onclick="return confirm('Confirm to delete?')" class="btn btn-outline-danger">Delete</button></form>
+                                                </td>
+                                              </tr>
+                                            <% }) %>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                    <div class="tab-pane fade" id="pills-published" role="tabpanel" aria-labelledby="pills-published-tab" tabindex="0">
+                                        <table class="table custom-table table-hover">
+                                            <thead class="table-dark">
+                                              <tr>
+                                                <th scope="col">#</th>
+                                                <th scope="col">Article title</th>
+                                                <th scope="col">Created Time</th>
+                                                <th scope="col">Last Modified</th>
+                                                <th scope="col">Published Time</th>
+                                                <th scope="col">Total Read</th>
+                                                <th scope="col">Total Like</th>
+                                                <th scope="col">Action</th>
+                                              </tr>
+                                            </thead>
+                                            <tbody>
+                                            <% output.published.forEach(function(output){ %>
+                                              <tr>
+                                                <td><%= output.ArticleID %></td>
+                                                <td><%= output.title %></td>
+                                                <td><%= output.created_time %></td>
+                                                <td><%= output.last_modified %></td>
+                                                <td><%= output.published_time %></td>
+                                                <td><%= output.read %></td>
+                                                <td><%= output.totalLike %></td>
+                                                <td>
+                                                    <a href="/author/edit-article?id=<%= output.ArticleID %>&mode=edit"><button class="btn btn-outline-primary">Edit</button></a>
+                                                    <button onclick="return alert(location.host+'/reader/read-article?id=<%= output.ArticleID %>')" class="btn btn-outline-success">Sharing</button>
+                                                    <form action="/author/delete-article?id=<%= output.ArticleID %>" method="POST"><button onclick="return confirm('Confirm to delete?')" class="btn btn-outline-danger">Delete</button></form>
+                                                </td>
+                                              </tr>
+                                            <% }) %>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                  </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Include Bootstrap JS and its dependencies -->
+        <script src="/js/bootstrap.js"></script>
+    </body>
+</html>

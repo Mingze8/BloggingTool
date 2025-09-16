@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Blogging Tools</title>
+    <!-- Include CSS -->
+    <link rel="stylesheet" type="text/css" href="/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" type="text/css" href="/main.css">
+
+    <style>
+        .main-wrapper {
+            background: linear-gradient(35deg, #8edc96, #deecdd);
+            background-blend-mode: overlay;
+            animation: background 8s linear infinite;
+        }
+
+        @keyframes background{
+            0%, 100%{
+                background-color: #ffffff00;
+            }
+            50%{
+                background-color: #ffffff60
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="main-wrapper d-flex flex-column justify-content-center align-items-center">
+        <h1>Welcome to the blog tool!</h1>
+        <h5 class="py-2">Select your path from below:</h5>
+        <div class="btn-group gap-2 mt-2">
+            <a href="/author"><button class="btn btn-outline-dark btn-lg">Author</button></a>
+            <a href="/reader"><button class="btn btn-outline-success btn-lg">Reader</button></a>
+        </div>
+    </div>
+
+    <!-- Include Bootstrap JS and its dependencies -->
+    <script src="/js/bootstrap.js"></script>
+</body>
+
+</html>

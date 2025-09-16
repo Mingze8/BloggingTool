@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Author Login</title>
+    <!-- Include CSS -->
+    <link rel="stylesheet" type="text/css" href="/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" type="text/css" href="/main.css">
+
+    <style>
+        .main-wrapper {
+            background: linear-gradient(35deg, #8edc96, #deecdd);
+            background-blend-mode: overlay;
+            animation: background 8s linear infinite;
+        }
+
+        @keyframes background{
+            0%, 100%{
+                background-color: #ffffff00;
+            }
+            50%{
+                background-color: #ffffff60
+            }
+        }
+    </style>
+</head>
+<body>
+    
+    <div class="main-wrapper d-flex flex-column justify-content-center align-items-center">
+        <% if (message.error) { %>
+            <div class="alert alert-warning fade d-flex align-items-center show custom-author" role="alert">
+                <i class="fa fa-exclamation me-2" aria-hidden="true"></i>
+                <p><%= message.error[0].msg %></p>
+            </div>
+        <% } %>
+        <h1 class="mb-4">Author - Login Page</h1>
+        <div class="login-form d-flex gap-1">
+            <form action="login-attempted" method="POST">
+                <input type="text" placeholder="Input your secret key" name="secretKey" id="secretKey">
+                <button type="submit" class="main btn btn-outline-dark">Login</button>
+            </form>
+        </div>
+        <p class="py-3">OR</p>
+        <a href="/"><button class="btn btn-outline-dark">Back To Main Page</button></a>
+
+    </div>
+    
+    <script>
+    document.addEventListener('DOMContentLoaded', function() {
+        // show the alert for 2 second
+        setTimeout(function() {
+            var alerts = document.querySelectorAll('.alert');
+            alerts.forEach(function(alert) {
+                var alertInstance = new bootstrap.Alert(alert);
+                alertInstance.close();
+            });
+        }, 3000);
+    });
+    </script>
+    <!-- Include Bootstrap JS and its dependencies -->
+    <script src="/js/bootstrap.js"></script>
+</body>
+</html>

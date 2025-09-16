@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Reader - Homepage</title>
+    <!-- Include CSS -->
+    <link rel="stylesheet" type="text/css" href="/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" type="text/css" href="/main.css">
+</head>
+<body>
+    <div class="main-wrapper">
+        <div class="top-bar text-center d-flex flex-column justify-content-between">
+            <div class="top-info d-flex justify-content-between px-4 pt-4">
+                <h6 style="text-align:left !important;">Reader - Homepage  <span class="text-success pt-1"> <a href="/">| Return to Main Page ></a></span></h6>
+                <% if (reader) { %>
+                    <p>Hi, <%= reader.username %> |
+                        <a href="/reader/logout/" style="font-weight: 600;">Logout</a>
+                    </p>
+                    
+                <% } else { %>
+                    <a href="/reader/login" style="font-weight: 500;">Login Now</a>
+                <% } %>
+            </div>
+            <div class="py-5">
+                <h1 class="w-75 m-auto mb-2"><%= output.blog.blog_title %></h1>
+                <h6><%= output.blog.author_name %></h6>
+            </div>
+        </div>
+        <div class="content mt-5">
+            <div class="container">
+                <div class="row">
+                    <div class="col-12">
+                        <div class="published-list">
+                            <% output.published.forEach(function(output){ %>
+                            <a href="/reader/read-article?id=<%= output.ArticleID %>">
+                                <div class="d-flex flex-column justify-content-center border rounded-3 h-100 text-center p-4">
+                                    <h5 class="fw-semibold"><%= output.title %></h5>
+                                    <p class="fw-light fst-italic" style="font-size:14px;">Published Time: <span class="d-block"><%= output.published_time %></span></p>
+                                </div>
+                            </a>
+                            <% }) %>
+                        </div> 
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Include Bootstrap JS and its dependencies -->
+    <script src="/js/bootstrap.js"></script>
+</body>
+</html>

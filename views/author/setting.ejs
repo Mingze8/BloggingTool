@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Author Setting Page</title>
+    <!-- Include CSS -->
+    <link rel="stylesheet" type="text/css" href="/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" type="text/css" href="/main.css">
+</head>
+<body>
+    <div class="main-wrapper d-flex flex-nowrap">
+        <div class="flex flex-column flex-shrink-0 sidebar pt-5">
+            <div class="nav-title"><i class="fa fa-smile-o fa-lg me-2"></i>Author - Setting Page</div>
+            <ul class="list-unstyled pt-4">
+                <li><a href="/author/"><p>Go Back<i class="fa fa-chevron-right"></i></p></a></li>
+            </ul>
+        </div>
+        <div class="content pt-5 w-100">
+            <div class="container">
+                <div class="row">
+                    <div class="col-12">
+                        <div class="page-top d-flex align-items-end justify-content-between pb-4">
+                            <div>
+                                <h1>Setting Your Blog</h1>
+                            </div>
+                        </div>
+
+                        <div class="form-column pt-5" style="width:70%;">
+                            <form action="/author/updated-blog" method="POST">
+                                <div class="frow mt-0">
+                                    <label for=""><p><b>Blog Title</b></p></label>
+                                    <input type="text" name="blogTitle" id="blogTitle" value="<%= output.blog_title %>" required>
+                                </div>
+                                <div class="frow">
+                                    <label for=""><p><b>Author Name</b></p></label>
+                                    <input type="text" name="authorName" id="authorName" value="<%= output.author_name %>" required>
+                                </div>
+                                <button class="submitBtn" type="submit">Submit</button>
+                            </form>                        
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Include Bootstrap JS and its dependencies -->
+    <script src="/js/bootstrap.js"></script>
+</body>
+</html>

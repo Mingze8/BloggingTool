@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Reader- Article Page</title>
+    <!-- Include CSS -->
+    <link rel="stylesheet" type="text/css" href="/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" type="text/css" href="/main.css">
+</head>
+<body>
+    <div class="main-wrapper">
+        <div class="top-bar text-center d-flex flex-column justify-content-between">
+            <div class="top-info d-flex justify-content-between px-4 pt-4">
+                <h6>Reader - Article Page</h6>
+                <% if (reader) { %>
+                    <p>Hi, <%= reader.username %> |
+                        <a href="/reader/logout/" style="font-weight: 600;">Logout</a>
+                    </p>
+                    
+                <% } else { %>
+                    <a href="/reader/login" style="font-weight: 500;">Login Now</a>
+                <% } %>
+            </div>
+            <div class="py-5">
+                <h1 class="w-75 m-auto mb-2"><%= output.article.title %></h1>
+                <h6>Published on: <%= output.article.published_time %> <span class="mx-2">|</span> 
+                    Total Like: <%= row.totalLike %> <span class="mx-2">|</span> 
+                    Total View: <%= output.article.read %>
+                </h6>
+            </div>
+        </div>
+        <div class="content mt-5">
+            <div class="container">
+                <div class="article-content pt-3">
+                    <div class="row">
+                        <div class="col-10">
+                            <div class="cPara ">
+                                <p class="lh-lg"><%= output.article.content %></p>
+                            </div>
+                        </div>
+                        <div class="col-2 text-end">
+                            <a href="/reader/"> <span class="fw-bold me-1"><</span> Return Back </a>
+                        </div>
+                    </div> 
+                </div>
+                <div class="like-sec">
+                    <form action="/reader/submitted-like?status=<%= isLiked %>&id=<%= article_id %>" method="POST">
+                        <% if(reader && isLiked) { %>
+                            <p class="fw-bold mt-5">Is this article looks good for you - Give it a like ! <button class="btn btn-danger btn-sm ms-3" type="submit">Unlike</button></p>
+                        <% } else if (reader && !isLiked) { %>
+                            <p class="fw-bold mt-5">Is this article looks good for you - Give it a like ! <button class="btn btn-success btn-sm ms-3" type="submit">Like</button></p>
+                        <% } %>
+                    </form>
+                </div>
+                <div class="comment-sec border-top mt-5 mb-5">
+                    <div class="row">
+                        <div class="col-7 border-end">
+                            <div class="comment-area px-5 py-5">
+                                <% if(output.comments.length > 0) {%>
+                                    <% output.comments.forEach((comment) => {%>
+                                        <div class="mb-4">
+                                            <p class="mb-2"><%= comment.content %></p>
+                                            <p><b><%= comment.user_name %></b> - <span class="fst-italic" style="font-size:14px">Comment on: <%= comment.comment_time %></span></p>
+                                        </div>
+                                    <% }) %>
+                                <% } else { %>
+                                    <div class="mb-4">
+                                        <p>Be the first one to comment !</p>
+                                    </div>
+                                <% } %>
+                            </div>
+                        </div>
+                        <div class="col-5">
+                            <div class="comment-form px-4 py-5">
+                                <form action="/reader/submitted-comment" method="POST">
+                                    <% if(!reader) { %>
+                                        <p class="text-center">Register an account or login now to leave a comment ! <a class="d-block" href="/reader/login"><button class="btn btn-warning mt-3">LOGIN NOW</button></a></p>
+                            
+                                    <% } else { %>
+                                        <input type="hidden" name="articleID" id="articleID" value="<%= article_id %>">
+                                        <div class="frow mt-0">
+                                            <label for="username">Username</label>
+                                            <input type="text" name="username" id="username" value="<%= reader.username %>" disabled>
+                                        </div>
+                                        <div class="frow">
+                                            <label for="comment">Comment</label>
+                                            <textarea name="comment" id="comment" required></textarea>
+                                        </div>
+                                        
+                                        
+                                        <button class="submitBtn" type="submit">Submit</button>
+                                    <% } %>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Include Bootstrap JS and its dependencies -->
+    <script src="/js/bootstrap.js"></script>
+</body>
+</html>

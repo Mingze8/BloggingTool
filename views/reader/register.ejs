@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Reader - Register</title>
+    <!-- Include CSS -->
+    <link rel="stylesheet" type="text/css" href="/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" type="text/css" href="/main.css">
+</head>
+<body>
+    <div class="main-wrapper d-flex flex-nowrap">
+        
+        <div class="flex flex-column flex-shrink-0 sidebar pt-5">
+            <div class="nav-title"><i class="fa fa-smile-o fa-lg me-2"></i>Reader - Register Page</div>
+            <ul class="list-unstyled pt-4">
+                <li><a href="/reader/"><p>Back To Homepage<i class="fa fa-chevron-right"></i></p></a></li>
+                <li><a href="/reader/login/"><p>Login Account<i class="fa fa-chevron-right"></i></p></a></li>
+            </ul>
+        </div>
+        <div class="content pt-5 w-100">
+            <div class="container">
+                <div class="row">
+                    <div class="col-12">
+                        <div class="page-top d-flex align-items-end justify-content-between pb-4">
+                            <div>
+                                <h1>Register an account</h1>
+                            </div>
+                        </div>
+                        <div class="pt-5">
+                            <% if (message.error && message.error.length > 0) { %>
+                                <% message.error.forEach(error => { %>
+                                    <div class="alert alert-warning fade d-flex align-items-center show" role="alert">
+                                        <i class="fa fa-exclamation me-2" aria-hidden="true"></i>
+                                        <p><%= error.msg %></p>
+                                    </div>
+                                <% }) %>
+                            <% } %>
+                            <div class="form-column" style="width:70%;">
+                                <form action="/reader/register-attempted" method="POST">
+                                    <div class="frow mt-0">
+                                        <label for="userName">Username</label>
+                                        <input placeholder="Please enter your prefer username" type="text" name="userName" id="userName">
+                                    </div>
+                                    <div class="frow">
+                                        <label for="userEmail">Email</label>
+                                        <input placeholder="Please enter your email" type="email" name="userEmail" id="userEmail">
+                                    </div>   
+                                    <div class="frow">
+                                        <label for="userPassword">Password</label>
+                                        <input placeholder="Please enter your prefer password" type="password" name="userPassword" id="userPassword">
+                                    </div>
+                                    <div class="frow">
+                                        <label for="confirmPassword">Confirm Password</label>
+                                        <input placeholder="Please re-enter your prefer password" type="password" name="confirmPassword" id="confirmPassword">
+                                    </div>
+                                    <button class="submitBtn" type="submit">Submit</button>
+                                </form>
+                            </div>
+                            
+                        
+                        </div>
+                        
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // show the alert for 2 second
+            setTimeout(function() {
+                var alerts = document.querySelectorAll('.alert');
+                alerts.forEach(function(alert) {
+                    var alertInstance = new bootstrap.Alert(alert);
+                    alertInstance.close();
+                });
+            }, 2000);
+        });
+    </script>
+    <!-- Include Bootstrap JS and its dependencies -->
+    <script src="/js/bootstrap.js"></script>
+</body>
+</html>
